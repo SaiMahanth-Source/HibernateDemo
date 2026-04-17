@@ -1,14 +1,19 @@
 package org.mahanth;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity
+@Entity //(name="Users") // This is for entity name which can be modified by user with corresponding value
+@Table(name="Users_Data")
+/*
+Table name and entity name were quite different whereas table name is derived from entity name
+ */
 public class User { // POJO - Plain Old Java Object
 
     @Id
     private int uId;
+//    @Transient // Using this annotation the data will not be stored in table in database which is temporary data
     private String uName;
+    @Column(name="User_Email") // User defined column name can be used with the @coloumn annotation
     private String uEmail;
 
     public User(){
@@ -33,7 +38,6 @@ public class User { // POJO - Plain Old Java Object
     public int getuId() {
         return uId;
     }
-
     public String getuName() {
         return uName;
     }
