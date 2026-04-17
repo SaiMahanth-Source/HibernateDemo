@@ -16,6 +16,14 @@ public class App
 //        user.setuName("Sai Mahanth Nagendla");
 //        user.setuEmail("Chintureddy1218@gmail.com");
 
+//        UserName userName = new UserName();
+//        userName.setFirstName("Nagendla");
+//        userName.setMiddleName("Sai Mahanth");
+//        userName.setLastName("Reddy");
+//
+//        user.setuId(1);
+//        user.setuName(userName);
+//        user.setuEmail("Chintureddy1218@gmail.com");
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class);
         //For default file name no need to mention the configuration file name
 

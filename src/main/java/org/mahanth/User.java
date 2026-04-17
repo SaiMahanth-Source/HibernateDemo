@@ -12,25 +12,27 @@ public class User { // POJO - Plain Old Java Object
     @Id
     private int uId;
 //    @Transient // Using this annotation the data will not be stored in table in database which is temporary data
-    private String uName;
+//    private String uName;
+    @Embedded
+    private UserName uName;
     @Column(name="User_Email") // User defined column name can be used with the @coloumn annotation
     private String uEmail;
 
     public User(){
 
     }
-    public User(int uId, String uName, String uEmail) {
-        this.uId = uId;
-        this.uName = uName;
-        this.uEmail = uEmail;
-    }
+//    public User(int uId, String uName, String uEmail) {
+//        this.uId = uId;
+//        this.uName = uName;
+//        this.uEmail = uEmail;
+//    }
 
     public void setuId(int uId) {
         this.uId = uId;
     }
-    public void setuName(String uName) {
-        this.uName = uName;
-    }
+//    public void setuName(String uName) {
+//        this.uName = uName;
+//    }
     public void setuEmail(String uEmail) {
         this.uEmail = uEmail;
     }
@@ -38,11 +40,19 @@ public class User { // POJO - Plain Old Java Object
     public int getuId() {
         return uId;
     }
-    public String getuName() {
-        return uName;
-    }
+//    public String getuName() {
+//        return uName;
+//    }
     public String getuEmail() {
         return uEmail;
+    }
+
+    public UserName getuName() {
+        return uName;
+    }
+
+    public void setuName(UserName uName) {
+        this.uName = uName;
     }
 
     @Override
