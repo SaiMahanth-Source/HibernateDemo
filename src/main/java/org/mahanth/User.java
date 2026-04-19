@@ -1,6 +1,9 @@
 package org.mahanth;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Cacheable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity //(name="Users") // This is for entity name which can be modified by user with corresponding value
 @Table(name="Users_Data")

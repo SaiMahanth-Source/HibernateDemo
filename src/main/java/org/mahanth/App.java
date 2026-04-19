@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+
 public class App
 {
     public static void main( String[] args )
@@ -31,16 +32,16 @@ public class App
 
         SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         // As buildSessionFactory is deprecated we were creating object of ServiceRegistry for to be else not required
-        Session session = sessionFactory.openSession();
+        Session session1 = sessionFactory.openSession();
 
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = session1.beginTransaction();
 //        session.persist(user);
 //        user = (User) session.get(User.class, 11);// get is from old hibernate
-        user = (User) session.find(User.class, 1);// find is for new hibernate
+        user = (User) session1.find(User.class, 1);// find is for new hibernate
         System.out.println(user);
 
-        user = (User) session.find(User.class, 1);
-        System.out.println(user);
+//        user = (User) session1.find(User.class, 1);
+//        System.out.println(user);
         /*
            When we mentioned different id's query filed for twice but when we mention same id in two different times
            then query will be filed for only once because of hibernate first level cache, which it stores the data for
@@ -48,6 +49,18 @@ public class App
          */
 
         transaction.commit();
-        session.close();
+        session1.close();
+
+        Session session2 = sessionFactory.openSession();
+
+        session2.beginTransaction();
+        user = (User) session2.find(User.class, 1);
+        System.out.println(user);
+        session2.getTransaction().commit();
+
+        session2.close();
+
+
+
     }
 }
