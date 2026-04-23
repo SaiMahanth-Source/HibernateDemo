@@ -1,6 +1,8 @@
 package org.mahanth;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.FetchType;
+import org.hibernate.annotations.Fetch;
 
 @Embeddable
 public class UserName {

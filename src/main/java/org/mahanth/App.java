@@ -51,14 +51,14 @@ public class App
         transaction.commit();
         session1.close();
 
-        Session session2 = sessionFactory.openSession();
-
-        session2.beginTransaction();
-        user = (User) session2.find(User.class, 1);
-        System.out.println(user);
-        session2.getTransaction().commit();
-
-        session2.close();
+//        Session session2 = sessionFactory.openSession();
+//
+//        session2.beginTransaction();
+//        user = (User) session2.find(User.class, 1);
+//        System.out.println(user);
+//        session2.getTransaction().commit();
+//
+//        session2.close();
 
 
 
