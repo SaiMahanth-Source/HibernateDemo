@@ -33,6 +33,7 @@ public class AppDemo {
 //
 //            session.persist(user);
 //        }
+        int a = 11;
 
         Query query1 = session.createQuery("from User"); // Like Select * from Users ;
         Query query2 = session.createQuery("from User where uId > 52");// Like Select * from Users where uId > 52 ;
@@ -40,7 +41,10 @@ public class AppDemo {
         Query query4 = session.createQuery("Select uId, uName, uEmail from User where uId = 19");
         Query query5 = session.createQuery("Select uId, uName, uEmail from User");
         Query query6 = session.createQuery("Select uId, uName, uEmail from User U where U.uId > 52");// Like Select * from Users where uId > 52 ;
-        Query query7 =  session.createQuery("Select sum(uId) from User where uId > 69");
+        Query query7 = session.createQuery("Select sum(uId) from User where uId > 69");
+        Query query8 = session.createQuery("Select sum(uId) from User where uId > :b");
+        query8.setParameter("b", a);
+        query8.setParameter("b", 11); // In place of variable we can directly use value as well
 
 //        List<User> users = query1.list();
 //        for(User user : users){
@@ -57,7 +61,7 @@ public class AppDemo {
 //            System.out.println(u[0] + " :  " + u[1] + " : " +  u[2]);
 //        }
 
-        Long sumOfMarks = (Long)query7.uniqueResult();
+        Long sumOfMarks = (Long)query8.uniqueResult();
         System.out.println(sumOfMarks);
 
         transaction.commit();
