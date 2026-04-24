@@ -12,7 +12,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        User user = null ;
+//        User user = null ;
 //        user.setuId(1);
 //        user.setuName("Sai Mahanth Nagendla");
 //        user.setuEmail("Chintureddy1218@gmail.com");
@@ -35,10 +35,15 @@ public class App
         Session session1 = sessionFactory.openSession();
 
         Transaction transaction = session1.beginTransaction();
-//        session.persist(user);
-//        user = (User) session.get(User.class, 11);// get is from old hibernate
-        user = (User) session1.find(User.class, 1);// find is for new hibernate
-        System.out.println(user);
+//        session1.persist(user);
+
+        User user = session1.find(User.class,1);
+        session1.remove(user); // For deleting data
+
+
+//        user1 = (User) session.get(User.class, 11);// get is from old hibernate
+//        user1 = (User) session1.find(User.class, 1);// find is for new hibernate
+//        System.out.println(user1);
 
 //        user = (User) session1.find(User.class, 1);
 //        System.out.println(user);
@@ -59,8 +64,6 @@ public class App
 //        session2.getTransaction().commit();
 //
 //        session2.close();
-
-
 
     }
 }
