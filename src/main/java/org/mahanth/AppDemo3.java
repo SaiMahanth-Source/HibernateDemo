@@ -1,42 +1,39 @@
 package org.mahanth;
 
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class AppDemo3 {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class).addAnnotatedClass(UserName.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        UserName userName = new UserName();
-        userName.setFirstName("Sai");
-        userName.setMiddleName("Mahanth"); //
-        userName.setLastName("Nagendla");
+//        User user1 = session.find(User.class,1);// It will hit db because fetch type is eager that's why and not proxy
 
-        User user = new User() ;
-        user.setuId(1);
-        user.setuName(userName);
-        user.setuEmail("saimahanthnagendla3@gmail.com"); // At this point it is in transient state
-
-        session.persist(user);
         /*
-        Once persisted then it is in persistence state which means for every change in code it fires query
+        Load or getReference will not hit the database until unless we are using in the code so it gives proxy object instead
+        */
+        User user2 = session.getReference(User.class,2);
+        /*
+        find, load will throw different exception for example if no data then find will return the null and load will
+        throw no object found error which we can handle with try catch
          */
+//        System.out.println(user1);
 
-        user.setuEmail("Chintureddy1218@gmail.com"); // At this point it fires update query because of persistence state
+        try{
+            System.out.println(user2);
+        }
+        catch(ObjectNotFoundException objectNotFoundException){
+            System.out.println(objectNotFoundException.getMessage());
+        }
 
-//        session.remove(user);// Object will be in detached state after removing no more link between db and code
-
-        session.getTransaction().commit(); // Once commited it goes to detach state
-
-        session.detach(user); // Using detach method we are making it to detach state
-
-        user.setuEmail("saimahanthnagendla3@gmail.com");
-        session.close(); //
+        session.getTransaction().commit();
+        session.close();
     }
 }
