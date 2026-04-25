@@ -43,8 +43,6 @@ public class AppDemo {
         Query query6 = session.createQuery("Select uId, uName, uEmail from User U where U.uId > 52");// Like Select * from Users where uId > 52 ;
         Query query7 = session.createQuery("Select sum(uId) from User where uId > 69");
         Query query8 = session.createQuery("Select sum(uId) from User where uId > :b");
-        Query query9 = session.createQuery("Delete from User where uId > 1");
-
         query8.setParameter("b", a);
         query8.setParameter("b", 11); // In place of variable we can directly use value as well
 
@@ -63,10 +61,8 @@ public class AppDemo {
 //            System.out.println(u[0] + " :  " + u[1] + " : " +  u[2]);
 //        }
 
-//        Long sumOfMarks = (Long)query8.uniqueResult();
-//        System.out.println(sumOfMarks);
-
-        System.out.println(query9.executeUpdate());
+        Long sumOfMarks = (Long)query8.uniqueResult();
+        System.out.println(sumOfMarks);
 
         transaction.commit();
         session.close();
